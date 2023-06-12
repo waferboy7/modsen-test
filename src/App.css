@@ -1,0 +1,141 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+.App {
+  background-color: beige;
+  display: block;
+}
+
+.header {
+  width: 100%;
+  min-height: 200px;
+  max-height: 200px;
+  background-color: rgba(0, 0, 0, 0.7);
+  color: rgba(247, 255, 232, 0.829);
+  font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
+    "Lucida Sans", Arial, sans-serif;
+  font-size: 25px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.search {
+  width: 80%;
+  height: 25px;
+  display: flex;
+  margin-bottom: 10px;
+}
+
+input::-webkit-search-decoration,
+input::-webkit-search-cancel-button,
+input::-webkit-search-results-button,
+input::-webkit-search-results-decoration {
+  display: none;
+}
+
+.search input {
+  width: 79%;
+  min-width: 250px;
+  padding-left: 5px;
+  font-size: 15px;
+  height: 100%;
+  outline: none;
+}
+
+.search button {
+  width: 15%;
+  min-width: 50px;
+  height: 100%;
+}
+
+.filters {
+  width: 70%;
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.filter p {
+  font-size: 20px;
+}
+.filter select {
+  min-width: 150px;
+  max-width: 200px;
+  height: 25px;
+  font-size: 15px;
+
+  outline: none;
+}
+
+.book-list {
+  width: 90%;
+  height: 100%;
+}
+
+.item-book {
+  width: 25%;
+  min-width: 150px;
+  height: 380px;
+  padding: 10px 5px;
+
+  background-color: rgba(240, 248, 255, 0.753);
+  font-size: 15px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.item-book h1 {
+  font-size: 20px;
+}
+
+@media only screen and (min-width: 1281px) and (max-width: 1920px) {
+}
+
+@media only screen and (min-width: 769px) and (max-width: 1280px) {
+  .header {
+    font-size: 20px;
+  }
+}
+
+@media only screen and (min-width: 0px) and (max-width: 768px) {
+  .header {
+    font-size: 15px;
+  }
+
+  .search {
+    min-width: 300px;
+  }
+
+  .filter select {
+    min-width: 125px;
+    max-width: 150px;
+  }
+
+  .book-list {
+    width: 100%;
+  }
+
+  .item-book {
+    width: 96%;
+    min-width: 150px;
+    height: 200px;
+
+    display: flex;
+    flex-direction: row;
+    align-items: stretch;
+  }
+
+  .item-book img {
+    width: 40%;
+    max-width: 150px;
+    height: 100%;
+    margin: 0 10px;
+  }
+}
