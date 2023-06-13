@@ -1,78 +1,71 @@
 import React, { useState } from "react";
 import axios from "axios";
 import "./App.css";
+import Header from "./components/Header";
+import BookList from "./components/BookList";
 import ItemBook from "./components/ItemBook";
 
 function App() {
-  const [count, setCount] = useState("");
-  const [book, setBook] = useState({
-    title: "",
-    authors: [""],
-    categories: "",
-    logo: "",
-  });
+  const API_KEY = "AIzaSyDaPmn0zO5pzRm65fdeFmSOIsPTaV4dY7M";
+  const SITE = "https://www.googleapis.com/books/v1/volumes";
 
-  const loadBooks = function () {
+  const [books, setBooks] = useState([]);
+  const [count, setCount] = useState("");
+
+  const loadBooks = (query, categories, orderBy) => {
+    const readyQuery = query.split(" ").join("+");
+    const authors = "";
+    const startIndex = 0;
+    const maxResults = 30;
+
     axios
       .get(
-        "https://www.googleapis.com/books/v1/volumes?q=js:keyes&key=AIzaSyDaPmn0zO5pzRm65fdeFmSOIsPTaV4dY7M"
+        SITE +
+          "?q=intitle:" +
+          readyQuery +
+          "+subject:" +
+          categories +
+          "&startIndex=" +
+          startIndex +
+          "&maxResults=" +
+          maxResults +
+          "&orderBy=" +
+          orderBy +
+          "&key=" +
+          API_KEY
       )
       .then(function (responce) {
         setCount(responce.data.totalItems);
-        const book = responce.data.items[0];
 
-        const firstBook = {
-          title: book.volumeInfo.title,
-          authors: book.volumeInfo.authors,
-          categories: book.volumeInfo?.categories?.at(0),
-          logo: book.volumeInfo.imageLinks.thumbnail,
-        };
+        const listBooks = responce.data.items;
+        const final = [];
 
-        setBook(firstBook);
+        if (listBooks.length > 0) {
+          setBooks(
+            listBooks.map((item) => {
+              const infoAboutBook = {
+                title: item.volumeInfo.title,
+                authors: item.volumeInfo.authors,
+                categories: item.volumeInfo?.categories?.[0],
+                logo: item.volumeInfo.imageLinks?.thumbnail,
+                id: item.id,
+              };
+
+              return infoAboutBook;
+            })
+          );
+        }
+
+        console.log(listBooks);
       })
-
-      .catch((e) => console.log(e));
+      .catch((e) => {
+        console.error(e);
+      });
   };
-
   return (
     <div className="App">
-      <header className="header">
-        <h1>Search for book</h1>
-        <div className="search">
-          <input type="search" placeholder="search"></input>
-          <button>Search</button>
-        </div>
-        <div className="filters">
-          <div className="filter">
-            <p>Categories</p>
-            <select>
-              <option value="">
-                All
-              </option>
-              <option value="art">Art</option>
-              <option value="biography">Biography</option>
-              <option value="computers">Computers</option>
-              <option value="history">History</option>
-              <option value="medical">Medical</option>
-              <option value="poetry">Poetry</option>
-            </select>
-          </div>
-          <div className="filter">
-            <p>Sorting by</p>
-            <select>
-              <option value="">
-                Relevance
-              </option>
-              <option value="newest">Newest</option>
-            </select>
-          </div>
-        </div>
-      </header>
-      <main className="book-list">
-        <button onClick={loadBooks}>Press ME</button>
-        <ItemBook book={book}></ItemBook>
-        {count !== "" ? <h1>Found {count} results</h1> : <></>}
-      </main>
+      <Header load={loadBooks} />
+      {books.length > 0 ? <BookList books={books} count={count} /> : <></>}
     </div>
   );
 }

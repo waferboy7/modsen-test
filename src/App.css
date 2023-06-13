@@ -10,8 +10,8 @@
 
 .header {
   width: 100%;
-  min-height: 200px;
-  max-height: 200px;
+  min-height: 25vh;
+  max-height: 30vh;
   background-color: rgba(0, 0, 0, 0.7);
   color: rgba(247, 255, 232, 0.829);
   font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
@@ -25,7 +25,7 @@
 }
 
 .search {
-  width: 80%;
+  width: 60%;
   height: 25px;
   display: flex;
   margin-bottom: 10px;
@@ -72,12 +72,12 @@ input::-webkit-search-results-decoration {
 }
 
 .book-list {
-  width: 90%;
-  height: 100%;
+  width: 90vw;
+  height: 75vh;
 }
 
 .item-book {
-  width: 25%;
+  /* width: 20vw;
   min-width: 150px;
   height: 380px;
   padding: 10px 5px;
@@ -88,23 +88,45 @@ input::-webkit-search-results-decoration {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: space-between;
+  justify-content: space-between; */
+
+  width: 300px;
+  background-color: #f5f5f5;
+  padding: 20px;
+  text-align: center;
+  border: 1px solid #ccc;
 }
 
 .item-book h1 {
+  /* font-size: 20px; */
   font-size: 20px;
+  margin-bottom: 5px;
 }
 
-@media only screen and (min-width: 1281px) and (max-width: 1920px) {
+.item-book p {
+  margin-bottom: 5px;
 }
 
-@media only screen and (min-width: 769px) and (max-width: 1280px) {
+.item-book img {
+  width: 200px; /* Задаем ширину изображения */
+  height: auto; /* Автоматически рассчитываем высоту */
+  margin-bottom: 10px;
+}
+
+.item-book .category {
+  text-decoration: underline; /* Подчеркиваем категорию */
+}
+
+@media only screen and (min-width: 1280px) and (max-width: 1920px) {
+}
+
+@media only screen and (min-width: 768px) and (max-width: 1279px) {
   .header {
     font-size: 20px;
   }
 }
-
-@media only screen and (min-width: 0px) and (max-width: 768px) {
+/*max-width: 425px*/
+@media only screen and (min-width: 0px) and (max-width: 767px) {
   .header {
     font-size: 15px;
   }
@@ -123,19 +145,51 @@ input::-webkit-search-results-decoration {
   }
 
   .item-book {
-    width: 96%;
+    /* width: 96%;
     min-width: 150px;
     height: 200px;
 
     display: flex;
     flex-direction: row;
-    align-items: stretch;
+    align-items: stretch; */
+
+    /*width: 80%; /* Уменьшаем ширину карточки для мобильных устройств */
+    /*margin: 0 auto; /* Центрируем карточку по горизонтали */
+
+    width: 100%; /* Используем ширину 100% для мобильных устройств */
+    padding: 0;
+    background-color: #f5f5f5;
+    text-align: center;
+    border: 1px solid #ccc;
+    display: flex; /* Используем flexbox для размещения элементов внутри карточки */
+    /*flex-wrap: wrap; /* Разрешаем перенос элементов на новую строку */
+  }
+
+  .item-book-img {
+    width: 30%;
   }
 
   .item-book img {
-    width: 40%;
+    padding-left: 10px;
+    padding-top: 10px;
+    width: 100%;
+    height: auto;
+    
+  }
+
+  /*.item-book img {
+    /* width: 40%;
     max-width: 150px;
     height: 100%;
-    margin: 0 10px;
+    margin: 0 10px; */
+
+    /*width: 20%;
+  }*/
+
+  .item-book-text {
+    width: 70%;
+    text-align: left;
+    padding-left: 20px;
+    padding-right: 10px;
   }
 }
