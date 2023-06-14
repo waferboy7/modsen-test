@@ -38,7 +38,6 @@ function App() {
         setCount(responce.data.totalItems);
 
         const listBooks = responce.data.items;
-        const final = [];
 
         if (listBooks.length > 0) {
           setBooks(
@@ -62,6 +61,7 @@ function App() {
         console.error(e);
       });
   };
+  
   return (
     <div className="App">
       <Header load={loadBooks} />

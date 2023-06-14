@@ -8,11 +8,7 @@ const ItemBook = ({ book }) => {
       </div>
       <div className="item-book-text">
         <h1>{book.title}</h1>
-        {book.authors ? (
-          book.authors.map((author, index) => <p key={index}>{author}</p>)
-        ) : (
-          <></>
-        )}
+        {book.authors ? <p>{book.authors.join(", ")}</p> : <></>}
         <p className="category">{book.categories}</p>
       </div>
     </div>
