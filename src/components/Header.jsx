@@ -6,7 +6,7 @@ const Header = (props) => {
   const [orderBy, setOrderBy] = useState("relevance");
 
   const search = () => {
-    props.load(query, categories, orderBy);
+    props.get(query, categories, orderBy);
   };
 
   return (
