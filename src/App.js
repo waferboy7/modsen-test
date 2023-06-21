@@ -1,53 +1,57 @@
 import React, { useState } from "react";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+
 import axios from "axios";
+
 import "./App.css";
-import Header from "./components/Header";
-import BookList from "./components/BookList";
+
+import Header from "./components/Header/Header";
+import BookList from "./components/BookList/BookList";
+import BookPage from "./components/BookPage/BookPage";
 
 function App() {
-  const API_KEY = "AIzaSyDaPmn0zO5pzRm65fdeFmSOIsPTaV4dY7M";
+  const API_KEY = process.env.REACT_APP_API_KEY;
   const SITE = "https://www.googleapis.com/books/v1/volumes";
 
   const [books, setBooks] = useState([]);
   const [count, setCount] = useState("");
-  const [queryParams, setQueryParams] = useState({
-    query: "",
-    categories: "",
-    orderBy: "",
-    startIndex: 0,
-  });
+
+  const [title, setTitle] = useState("");
+  const [description, setDescription] = useState("");
+  const [category, setCategory] = useState("");
+  const [orderBy, setOrderBy] = useState("");
+  const [startIndex, setStartIndex] = useState(0);
 
   const getFirstBooks = (query, categories, orderBy) => {
     const readyQuery = query.split(" ").join("+");
-    const startIndex = 0;
     const maxResults = 30;
 
-    setQueryParams({
-      query: readyQuery,
-      categories: categories,
-      orderBy: orderBy,
-      startIndex: maxResults + 1,
-    });
+    setTitle(readyQuery);
+    setDescription("");
+    setCategory(categories);
+    setOrderBy(orderBy);
+
     setBooks([]);
     setCount("");
 
     axios
       .get(
         SITE +
-          "?q=intitle:" +
-          readyQuery +
-          "+subject:" +
-          categories +
-          "&startIndex=" +
-          startIndex +
-          "&maxResults=" +
-          maxResults +
-          "&orderBy=" +
-          orderBy +
-          "&key=" +
-          API_KEY
+        "?q=intitle:" +
+        readyQuery +
+        "+subject:" +
+        category +
+        "&startIndex=" +
+        startIndex +
+        "&maxResults=" +
+        maxResults +
+        "&orderBy=" +
+        orderBy +
+        "&key=" +
+        API_KEY
       )
       .then((responce) => {
+        setStartIndex(maxResults + 1);
         setCount(responce.data.totalItems);
 
         const listBooks = responce.data.items;
@@ -57,11 +61,11 @@ function App() {
             listBooks.map((item) => {
               const infoAboutBook = {
                 title: item.volumeInfo.title,
-                authors: item.volumeInfo.authors,
-                categories: item.volumeInfo?.categories?.[0],
-                logo: item.volumeInfo.imageLinks?.thumbnail,
+                description: item.volumeInfo.description || "",
+                authors: item.volumeInfo.authors || [],
+                categories: item.volumeInfo.categories || [],
+                logo: item.volumeInfo.imageLinks?.thumbnail || "",
                 id: item.id,
-                etag: item.etag,
               };
 
               return infoAboutBook;
@@ -82,18 +86,18 @@ function App() {
     axios
       .get(
         SITE +
-          "?q=intitle:" +
-          queryParams.query +
-          "+subject:" +
-          queryParams.categories +
-          "&startIndex=" +
-          queryParams.startIndex +
-          "&maxResults=" +
-          maxResults +
-          "&orderBy=" +
-          queryParams.orderBy +
-          "&key=" +
-          API_KEY
+        "?q=intitle:" +
+        title +
+        "+subject:" +
+        category +
+        "&startIndex=" +
+        startIndex +
+        "&maxResults=" +
+        maxResults +
+        "&orderBy=" +
+        orderBy +
+        "&key=" +
+        API_KEY
       )
       .then((responce) => {
         const listBooks = responce.data.items;
@@ -103,33 +107,34 @@ function App() {
           const newBooks = listBooks.map((item) => {
             const infoAboutBook = {
               title: item.volumeInfo.title,
-              authors: item.volumeInfo.authors,
-              categories: item.volumeInfo?.categories?.[0],
-              logo: item.volumeInfo.imageLinks?.thumbnail,
+              description: item.volumeInfo.description || "",
+              authors: item.volumeInfo.authors || [],
+              categories: item.volumeInfo.categories || [],
+              logo: item.volumeInfo.imageLinks?.thumbnail || "",
               id: item.id,
             };
 
             return infoAboutBook;
           });
 
-          setBooks([...books, ...newBooks]);
+          setBooks((prevBooks) => [...prevBooks, ...newBooks]);
 
-          setQueryParams({
-            query: queryParams.query,
-            categories: queryParams.categories,
-            orderBy: queryParams.orderBy,
-            startIndex: queryParams.startIndex + maxResults,
-          });
+          setStartIndex((prevIndex) => prevIndex + maxResults);
         }
       })
       .catch((e) => console.error(e));
   };
 
   return (
-    <div className="App">
-      <Header get={getFirstBooks} />
-      <BookList books={books} count={count} load={loadMoreBooks} />
-    </div>
+    <BrowserRouter>
+      <div className="App">
+        <Header get={getFirstBooks} />
+        <Routes>
+          <Route path="/" element={<BookList books={books} count={count} load={loadMoreBooks} />} />
+          <Route path="/:bookId" element={<BookPage books={books} />} />
+        </Routes>
+      </div>
+    </BrowserRouter>
   );
 }
 
