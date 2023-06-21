@@ -1,12 +1,18 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const Header = (props) => {
+  const navigate = useNavigate();
+  
   const [query, setQuery] = useState("");
   const [categories, setCategories] = useState("");
   const [orderBy, setOrderBy] = useState("relevance");
 
+
   const search = () => {
     props.get(query, categories, orderBy);
+
+    navigate("/");
   };
 
   return (

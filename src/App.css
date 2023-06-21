@@ -111,16 +111,21 @@ input::-webkit-search-results-decoration {
   text-align: center;
   border: 1px solid #ccc;
   
+  text-decoration: none;
 }
 
 .item-book h1 {
   /* font-size: 20px; */
   font-size: 17px;
   margin-bottom: 5px;
+  text-decoration: none;
+
 }
 
 .item-book p {
   margin-bottom: 5px;
+  text-decoration: none;
+
 }
 /* 
 .item-book-img {
