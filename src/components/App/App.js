@@ -5,9 +5,9 @@ import axios from "axios";
 
 import "./App.css";
 
-import Header from "./components/Header/Header";
-import BookList from "./components/BookList/BookList";
-import BookPage from "./components/BookPage/BookPage";
+import Header from "../Header/Header";
+import BookList from "../BookList/BookList";
+import BookPage from "../BookPage/BookPage";
 
 function App() {
   const API_KEY = process.env.REACT_APP_API_KEY;
@@ -24,13 +24,14 @@ function App() {
 
   const getFirstBooks = (query, categories, orderBy) => {
     const readyQuery = query.split(" ").join("+");
+    const startIndex = 0;
     const maxResults = 30;
 
     setTitle(readyQuery);
     setDescription("");
     setCategory(categories);
     setOrderBy(orderBy);
-
+    
     setBooks([]);
     setCount("");
 
