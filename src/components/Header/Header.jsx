@@ -2,25 +2,25 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import MySelect from "../MySelect/MySelect";
 
-const Header = (props) => {
+const Header = ({ title, setTitle, setCategory, setOrderBy, search }) => {
   const navigate = useNavigate();
 
-  const [query, setQuery] = useState("");
-  const [categories, setCategories] = useState("");
-  const [orderBy, setOrderBy] = useState("relevance");
-
-  const search = () => {
-    props.get(query, categories, orderBy);
+  const pressButtonSearch = () => {
+    search();
 
     navigate("/");
   };
 
-  const changeQuery = (query) => {
-    setQuery(query.target.value);
+  const pressEnter = (e) => {
+    if (e.key === "Enter") search();
+  };
+
+  const changeTitle = (searchValue) => {
+    setTitle(searchValue.target.value);
   };
 
   const changeCategory = (category) => {
-    setCategories(category.target.value);
+    setCategory(category.target.value);
   };
 
   const changeOrderBy = (order) => {
@@ -34,10 +34,11 @@ const Header = (props) => {
         <input
           type="search"
           placeholder="search..."
-          value={query}
-          onChange={changeQuery}
-        ></input>
-        <button onClick={search}>Search</button>
+          value={title}
+          onChange={changeTitle}
+          onKeyDown={pressEnter}
+        />
+        <button onClick={pressButtonSearch}>Search</button>
       </div>
       <div className="filters">
         <div className="filter">
