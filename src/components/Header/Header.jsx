@@ -1,30 +1,34 @@
-import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import MySelect from "../MySelect/MySelect";
+import "./Header.css";
 
-const Header = ({ title, setTitle, setCategory, setOrderBy, search }) => {
+import React from "react";
+import { useNavigate } from "react-router-dom";
+
+import DropDown from "../Dropdown/Dropdown";
+
+import { CATEGORY_OPTIONS, SORTING_OPTIONS } from "../../constants/constants";
+
+function Header({ title, setTitle, setCategory, setOrderBy, search, isLoad }) {
   const navigate = useNavigate();
 
   const pressButtonSearch = () => {
-    search();
-
     navigate("/");
+    search();
   };
 
   const pressEnter = (e) => {
     if (e.key === "Enter") search();
   };
 
-  const changeTitle = (searchValue) => {
-    setTitle(searchValue.target.value);
+  const changeTitle = (e) => {
+    setTitle(e.target.value);
   };
 
-  const changeCategory = (category) => {
-    setCategory(category.target.value);
+  const changeCategory = (e) => {
+    setCategory(e.target.value);
   };
 
-  const changeOrderBy = (order) => {
-    setOrderBy(order.target.value);
+  const changeOrderBy = (e) => {
+    setOrderBy(e.target.value);
   };
 
   return (
@@ -38,37 +42,22 @@ const Header = ({ title, setTitle, setCategory, setOrderBy, search }) => {
           onChange={changeTitle}
           onKeyDown={pressEnter}
         />
-        <button onClick={pressButtonSearch}>Search</button>
+        <button disabled={isLoad} type="button" onClick={pressButtonSearch}>
+          Search
+        </button>
       </div>
       <div className="filters">
         <div className="filter">
           <p>Categories</p>
-          <MySelect
-            options={[
-              { value: "", name: "All" },
-              { value: "art", name: "Art" },
-              { value: "biography", name: "Biography" },
-              { value: "computers", name: "Computers" },
-              { value: "history", name: "History" },
-              { value: "medical", name: "Medical" },
-              { value: "poetry", name: "Poetry" },
-            ]}
-            onChange={changeCategory}
-          />
+          <DropDown options={CATEGORY_OPTIONS} onChange={changeCategory} />
         </div>
         <div className="filter">
           <p>Sorting by</p>
-          <MySelect
-            options={[
-              { value: "relevance", name: "Relevance" },
-              { value: "newest", name: "Newest" },
-            ]}
-            onChange={changeOrderBy}
-          />
+          <DropDown options={SORTING_OPTIONS} onChange={changeOrderBy} />
         </div>
       </div>
     </header>
   );
-};
+}
 
 export default Header;
