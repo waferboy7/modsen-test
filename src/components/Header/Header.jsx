@@ -3,9 +3,8 @@ import "./Header.css";
 import React from "react";
 import { useNavigate } from "react-router-dom";
 
-import DropDown from "../Dropdown/Dropdown";
-
 import { CATEGORY_OPTIONS, SORTING_OPTIONS } from "../../constants/constants";
+import DropDown from "../Dropdown/Dropdown";
 
 function Header({ title, setTitle, setCategory, setOrderBy, search, isLoad }) {
   const navigate = useNavigate();

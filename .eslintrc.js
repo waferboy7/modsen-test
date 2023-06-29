@@ -20,10 +20,13 @@ module.exports = {
         "sourceType": "module"
     },
     "plugins": [
-        "react"
+        "react",
+        "simple-import-sort"
     ],
     "rules": {
         "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
-        "react/prop-types": 0
+        "react/prop-types": 0,
+        "simple-import-sort/imports": "error",
+        "simple-import-sort/exports": "error"
     }
 }

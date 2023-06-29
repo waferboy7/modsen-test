@@ -1,0 +1,129 @@
+.book-page {
+  width: 100%;
+  min-height: 75vh;
+  display: flex;
+}
+
+.book-page-image-container {
+  min-width: 40%;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.book-page-image-item {
+  width: 320px;
+  height: 460px;
+  object-fit: cover;
+  margin-right: 50px;
+  margin-top: 50px;
+  box-shadow: black 5px 5px 14px;
+  filter: blur(0.3px);
+}
+
+.book-page-info {
+  margin-top: 20px;
+  margin-right: 40px;
+  margin-left: 20px;
+  margin-bottom: 20px;
+  display: flex;
+  flex-direction: column;
+}
+
+.go-back-button {
+  width: 100px;
+  margin-bottom: 20px;
+  font-size: 15px;
+  font-weight: 700;
+  padding: 7px;
+  border-radius: 8px;
+  background-color: #ffffff;
+  transition: all 0.3s;
+  border: 0;
+  box-shadow: black 0px 0px 3px;
+}
+
+.go-back-button:hover {
+  cursor: pointer;
+  box-shadow: black 0px 0px 5px;
+}
+
+.go-back-button:active {
+  background-color: #8a8a8a;
+  color: white;
+  box-shadow: none;
+}
+
+.book-page-info .category {
+  font-style: italic;
+}
+
+.book-page-info .title {
+  font-size: 25px;
+}
+
+.book-page-info .authors {
+  margin-top: 5px;
+  margin-bottom: 15px;
+}
+
+.book-page-info .description {
+  margin: 10px;
+  padding: 10px;
+  box-shadow: black 0px 0px 4px;
+  border-radius: 8px;
+}
+
+.book-page-not-found {
+  width: 100%;
+  min-height: 75vh;
+  display: flex;
+  justify-content: center;
+}
+
+.not-found {
+  font-size: 35px;
+  font-weight: 500;
+}
+
+@media screen and (min-width: 1440px) {
+  .book-page-image-container {
+    min-width: 30%;
+  }
+}
+
+@media only screen and (min-width: 0px) and (max-width: 1023px) {
+  .book-page {
+    flex-direction: column;
+  }
+
+  .book-page-image-container {
+    width: 100%;
+    justify-content: flex-start;
+    margin-left: 10px;
+  }
+
+  .book-page-image-item {
+    margin-right: 0;
+    margin-top: 20px;
+    width: 260px;
+    height: 360px;
+  }
+
+  .book-page-info {
+    margin-left: 20px;
+    margin-right: 20px;
+    margin-top: 20px;
+  }
+
+  .book-page-info .description {
+    margin: 0px;
+    padding: 5px;
+  }
+}
+
+@media only screen and (min-width: 0px) and (max-width: 424px) {
+  .book-page-image-container {
+    justify-content: center;
+    margin-left: 0;
+  }
+}

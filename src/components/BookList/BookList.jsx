@@ -2,6 +2,7 @@ import "./BookList.css";
 
 import React from "react";
 import { v4 as uuidv4 } from "uuid";
+
 import ItemBook from "../ItemBook/ItemBook";
 
 function BookList({ load, count, books, isLoad }) {
@@ -20,7 +21,7 @@ function BookList({ load, count, books, isLoad }) {
         {books.length > 0 &&
           books.map((book) => <ItemBook key={uuidv4()} book={book} />)}
       </div>
-      {count > 0 && (
+      {count > 0 && count > books.length && (
         <button
           disabled={isLoad}
           type="submit"
