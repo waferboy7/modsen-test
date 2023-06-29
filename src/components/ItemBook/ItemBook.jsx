@@ -1,23 +1,27 @@
+import "./ItemBook.css";
+
 import React from "react";
 import { Link } from "react-router-dom";
 
-import "./ItemBook.css";
+import noImage from "../../assets/image/noImage.svg";
 
-const ItemBook = ({ book }) => {
+function ItemBook({ book: { id, logo, title, authors, categories } }) {
   return (
-    <div className="item-book">
-      <div className="item-book-img">
-        <Link to={book.id}>
-          <img src={book.logo} alt="" />
-        </Link>
+    <Link to={id} className="item-book">
+      <div className="item-book-image-container ">
+        <img
+          className="item-book-image-item"
+          src={logo || noImage}
+          alt="book"
+        />
       </div>
       <div className="item-book-text">
-        <h1>{book.title}</h1>
-        {book.authors ? <p>{book.authors.join(", ")}</p> : null}
-        <p className="category">{book.categories?.[0]}</p>
+        <h1>{title}</h1>
+        {authors ? <p>{authors.join(", ")}</p> : null}
+        <p className="category">{categories?.[0]}</p>
       </div>
-    </div>
+    </Link>
   );
-};
+}
 
 export default ItemBook;

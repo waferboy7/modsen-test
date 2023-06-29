@@ -1,29 +1,16 @@
-# Практического задание js/react
+# Book Search React App with Google Books API.
 
-## Задание
+**Documentation: https://developers.google.com/books/docs/v1/using.**
+**To authorize requests to the API, select the method with the provision of an API key (https://developers.google.com/books/docs/v1/using#APIKey).**
 
-Необходимо разработать React-приложение поиска книг с помощью Google Books API. Документация: https://developers.google.com/books/docs/v1/using. Для авторизации запросов к API выбрать способ с предоставлением API key (https://developers.google.com/books/docs/v1/using#APIKey).
+**Functional**
 
-__Функционал__
-
-- Должны быть текстовое поле и кнопка поиска. По введенной пользователем подстроке производится поиск книг. Триггером к поиску является либо нажатие Enter (когда текстовое поле в фокусе), либо нажатие кнопки поиска.
-- Фильтрация по категориям. Ниже текстового поля располагается селект с категориями: all, art, biography, computers, history, medical, poetry. Если выбрано "all" (выбрано изначально), то поиск производится по всем категориям.
-- Сортировка. Рядом с селектом категорий находится селект с вариантами сортировки: relevance (выбран изначально), newest. 
-- Найденные книги отображаются карточками, каждая из которых состоит из изображения обложки книги, названия книги, названия категории и имен авторов. Если для книги приходит несколько категорий, то отображается только первая. Авторы отображаются все. Если не приходит какой-либо части данных, то вместо нее просто пустое место.
-- Над блоком с карточками отображается количество найденных по запросу книг.
-- Пагинация реализована по принципу 'load more'. Ниже блока с карточками находится кнопка 'Load more', по клику на нее к уже загруженным книгам подгружаются еще. Шаг пагинации - 30.
-- При клике на карточку происходит переход на детальную страницу книги, на которой выводятся ее данные: изображение обложки, название, все категории, все авторы, описание.
-
-__Замечания__
-- При желании можно использовать Redux/Mobx
-- Во время загрузки книг стоит показать какой-то индикатор
-- Можно использовать сторонние библиотеки, например для визуализации и украшении приложения можно использовать [Bootstrap](http://getbootstrap.com/) или похожего UI фреймворк.
-- Помните про обработку ошибок!
-- Верстка может быть самая простая, однако она не должна ломаться при разрешениях от 320px до 1920px. 
-
-__Примерный вид приложения__
-
-![image](./js-react.png)
-![image](./js-react1.png)
+- There should be a text field and a search button. The substring entered by the user is used to search for books. The search trigger is either pressing Enter (when the text field has focus) or pressing the search button.
+- Filtering by categories. Below the text field is a select with categories: all, art, biography, computers, history, medical, poetry. If "all" is selected (initially selected), all categories are searched.
+- Sorting. Next to the category select is a select with sorting options: relevance (selected initially), newest.
+- Found books are displayed as cards, each of which consists of an image of the cover of the book, the title of the book, category titles and authors' names. If more than one category comes for a book, only the first one is displayed. All authors are displayed. If any part of the data does not arrive, then just an empty space instead.
+- Above the block with cards, the number of books found on request is displayed.
+- Pagination is implemented according to the 'load more' principle. Below the block with cards is the 'Load more' button, by clicking on it, more books are loaded to the already loaded books. Pagination step - 30.
+- When you click on the card, you go to the detailed page of the book, which displays its data: cover image, title, all categories, all authors, description.
 
 ---

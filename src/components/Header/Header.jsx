@@ -1,18 +1,33 @@
-import React, { useState } from "react";
+import "./Header.css";
+
+import React from "react";
 import { useNavigate } from "react-router-dom";
 
-const Header = (props) => {
+import { CATEGORY_OPTIONS, SORTING_OPTIONS } from "../../constants/constants";
+import DropDown from "../Dropdown/Dropdown";
+
+function Header({ title, setTitle, setCategory, setOrderBy, search, isLoad }) {
   const navigate = useNavigate();
-  
-  const [query, setQuery] = useState("");
-  const [categories, setCategories] = useState("");
-  const [orderBy, setOrderBy] = useState("relevance");
 
-
-  const search = () => {
-    props.get(query, categories, orderBy);
-
+  const pressButtonSearch = () => {
     navigate("/");
+    search();
+  };
+
+  const pressEnter = (e) => {
+    if (e.key === "Enter") search();
+  };
+
+  const changeTitle = (e) => {
+    setTitle(e.target.value);
+  };
+
+  const changeCategory = (e) => {
+    setCategory(e.target.value);
+  };
+
+  const changeOrderBy = (e) => {
+    setOrderBy(e.target.value);
   };
 
   return (
@@ -21,35 +36,27 @@ const Header = (props) => {
       <div className="search">
         <input
           type="search"
-          placeholder="search"
-          value={query}
-          onChange={(e) => setQuery(e.target.value)}
-        ></input>
-        <button onClick={search}>Search</button>
+          placeholder="search..."
+          value={title}
+          onChange={changeTitle}
+          onKeyDown={pressEnter}
+        />
+        <button disabled={isLoad} type="button" onClick={pressButtonSearch}>
+          Search
+        </button>
       </div>
       <div className="filters">
         <div className="filter">
           <p>Categories</p>
-          <select onChange={(e) => setCategories(e.target.value)}>
-            <option value="">All</option>
-            <option value="art">Art</option>
-            <option value="biography">Biography</option>
-            <option value="computers">Computers</option>
-            <option value="history">History</option>
-            <option value="medical">Medical</option>
-            <option value="poetry">Poetry</option>
-          </select>
+          <DropDown options={CATEGORY_OPTIONS} onChange={changeCategory} />
         </div>
         <div className="filter">
           <p>Sorting by</p>
-          <select onChange={(e) => setOrderBy(e.target.value)}>
-            <option value="relevance">Relevance</option>
-            <option value="newest">Newest</option>
-          </select>
+          <DropDown options={SORTING_OPTIONS} onChange={changeOrderBy} />
         </div>
       </div>
     </header>
   );
-};
+}
 
 export default Header;
