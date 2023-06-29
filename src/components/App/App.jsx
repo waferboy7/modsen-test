@@ -4,11 +4,10 @@ import React, { useState } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 
 import { MAX_RESULT } from "../../constants/constants";
-
-import Header from "../Header/Header";
+import getBooks from "../../utils/api/api";
 import BookList from "../BookList/BookList";
 import BookPage from "../BookPage/BookPage";
-import getBooks from "../../utils/api/api";
+import Header from "../Header/Header";
 
 function App() {
   const API_KEY = process.env.REACT_APP_API_KEY;
@@ -20,12 +19,11 @@ function App() {
   const [title, setTitle] = useState("");
   const [category, setCategory] = useState("");
   const [orderBy, setOrderBy] = useState("relevance");
-  const [startIndex, setStartIndex] = useState(0);
   const [isLoad, setIsLoad] = useState(false);
 
   const search = async () => {
     setIsLoad(true);
-    setStartIndex(0);
+    const startIndex = 0;
 
     const newBooks = await getBooks(
       URL_SITE,
@@ -44,7 +42,7 @@ function App() {
 
   const loadMore = async () => {
     setIsLoad(true);
-    setStartIndex(books.length + 1);
+    const startIndex = books.length + 1;
 
     const newBooks = await getBooks(
       URL_SITE,
@@ -59,7 +57,6 @@ function App() {
     setBooks((prevBooks) => [...prevBooks, ...newBooks.data]);
     setCount(newBooks.count);
 
-    setStartIndex((prevIndex) => prevIndex + MAX_RESULT);
     setIsLoad(false);
   };
 
