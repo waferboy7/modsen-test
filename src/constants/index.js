@@ -14,3 +14,8 @@ export const SORTING_OPTIONS = [
     { value: "relevance", name: "Relevance" },
     { value: "newest", name: "Newest" },
 ];
+
+export const dotEnv = {
+    API_KEY: process.env.REACT_APP_API_KEY,
+    URL_SITE: process.env.REACT_APP_URL
+}

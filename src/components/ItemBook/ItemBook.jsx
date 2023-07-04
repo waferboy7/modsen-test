@@ -17,7 +17,7 @@ function ItemBook({ book: { id, logo, title, authors, categories } }) {
       </div>
       <div className="item-book-text">
         <h1>{title}</h1>
-        {authors ? <p>{authors.join(", ")}</p> : null}
+        {authors && <p>{authors.join(", ")}</p>}
         <p className="category">{categories?.[0]}</p>
       </div>
     </Link>

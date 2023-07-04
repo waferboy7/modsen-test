@@ -3,18 +3,17 @@ import "./App.css";
 import React, { useState } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 
-import { MAX_RESULT } from "../../constants/constants";
+import BookList from "../../components/BookList/BookList";
+import BookPage from "../../components/BookPage/BookPage";
+import Header from "../../components/Header/Header";
+import { dotEnv, MAX_RESULT } from "../../constants";
 import getBooks from "../../utils/api/api";
-import BookList from "../BookList/BookList";
-import BookPage from "../BookPage/BookPage";
-import Header from "../Header/Header";
 
 function App() {
-  const API_KEY = process.env.REACT_APP_API_KEY;
-  const URL_SITE = process.env.REACT_APP_URL;
+  const { API_KEY, URL_SITE } = dotEnv;
 
   const [books, setBooks] = useState([]);
-  const [count, setCount] = useState(0);
+  const [count, setCount] = useState();
 
   const [title, setTitle] = useState("");
   const [category, setCategory] = useState("");
@@ -55,7 +54,6 @@ function App() {
     );
 
     setBooks((prevBooks) => [...prevBooks, ...newBooks.data]);
-    setCount(newBooks.count);
 
     setIsLoad(false);
   };

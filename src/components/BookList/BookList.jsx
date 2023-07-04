@@ -13,6 +13,7 @@ function BookList({ load, count, books, isLoad }) {
   return (
     <main className="book-list">
       {isLoad && <h1 className="book-list-found">Loading...</h1>}
+      {count === undefined && !isLoad && <h1>Lets find some books!</h1>}
       {count === 0 && !isLoad && (
         <h1 className="book-list-found">Books not founded</h1>
       )}

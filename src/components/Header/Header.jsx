@@ -3,19 +3,19 @@ import "./Header.css";
 import React from "react";
 import { useNavigate } from "react-router-dom";
 
-import { CATEGORY_OPTIONS, SORTING_OPTIONS } from "../../constants/constants";
-import DropDown from "../Dropdown/Dropdown";
+import { CATEGORY_OPTIONS, SORTING_OPTIONS } from "../../constants/index";
+import Dropdown from "../Dropdown/Dropdown";
 
 function Header({ title, setTitle, setCategory, setOrderBy, search, isLoad }) {
   const navigate = useNavigate();
 
   const pressButtonSearch = () => {
-    navigate("/");
     search();
+    navigate("/");
   };
 
   const pressEnter = (e) => {
-    if (e.key === "Enter") search();
+    if (e.key === "Enter") pressButtonSearch();
   };
 
   const changeTitle = (e) => {
@@ -48,11 +48,11 @@ function Header({ title, setTitle, setCategory, setOrderBy, search, isLoad }) {
       <div className="filters">
         <div className="filter">
           <p>Categories</p>
-          <DropDown options={CATEGORY_OPTIONS} onChange={changeCategory} />
+          <Dropdown options={CATEGORY_OPTIONS} onChange={changeCategory} />
         </div>
         <div className="filter">
           <p>Sorting by</p>
-          <DropDown options={SORTING_OPTIONS} onChange={changeOrderBy} />
+          <Dropdown options={SORTING_OPTIONS} onChange={changeOrderBy} />
         </div>
       </div>
     </header>

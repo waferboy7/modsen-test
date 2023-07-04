@@ -27,19 +27,19 @@
   font-weight: 700;
   padding: 7px;
   border-radius: 8px;
-  background-color: #ffffff;
+  background-color: rgba(255, 255, 255, 1);
   transition: all 0.3s;
   border: 0;
-  box-shadow: black 0px 0px 3px;
+  box-shadow: rgb(0, 0, 0) 0px 0px 3px;
 }
 
 .load-more-button:hover {
   cursor: pointer;
-  box-shadow: black 0px 0px 5px;
+  box-shadow: rgba(0, 0, 0, 1) 0px 0px 5px;
 }
 
 .load-more-button:active {
-  background-color: #8a8a8a;
-  color: white;
+  background-color: rgb(138, 138, 138);
+  color: rgba(255, 255, 255, 1);
   box-shadow: none;
 }
